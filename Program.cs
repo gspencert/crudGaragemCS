@@ -24,6 +24,7 @@ public class Program
 
             placas[qtdInseridos] = placa;
             qtdInseridos++;
+            Console.WriteLine("----------------------------");
             Console.WriteLine($"Placa {placa} foi registrada.");
         }
     }
@@ -37,6 +38,7 @@ public class Program
             Console.WriteLine("Placas na garagem: ");
             for (int i = 0; i < qtdInseridos; i++)
             {
+                Console.WriteLine("----------------------------");
                 Console.WriteLine($"Placa {i + 1}: {placas[i]}");
             }
 
@@ -65,6 +67,7 @@ public class Program
 
         int indice = escolha - 1;
 
+        Console.WriteLine("----------------------------");
         Console.WriteLine($"Removendo placa {placas[indice]}");
 
         for (int i = indice; i < qtdInseridos - 1; i++)
@@ -103,19 +106,21 @@ public class Program
         int indice = escolha - 1;
         string placaAntiga = placas[indice];
 
-        Console.Write($"Digite a **nova placa** para substituir **{placaAntiga}**: ");
+        Console.Write($"Digite a NOVA PLACA para substituir {placaAntiga}: ");
         string novaPlaca = Console.ReadLine()!.ToUpper();
 
         for (int i = 0; i < qtdInseridos; i++)
         {
             if (placas[i] == novaPlaca)
             {
+                Console.WriteLine("----------------------------");
                 Console.WriteLine($"A placa {novaPlaca} já está registrada na posição {i + 1}. Substituição cancelada.");
                 return;
             }
         }
 
         placas[indice] = novaPlaca;
+        Console.WriteLine("----------------------------");
         Console.WriteLine($"Placa substituída com sucesso: {placaAntiga} -> {novaPlaca}");
     }
 
@@ -161,6 +166,6 @@ public class Program
                     Console.WriteLine("Opção Inválida");
                     break;
             }
-        } while (opcao != 4);
+        } while (opcao != 5);
     }
 }
