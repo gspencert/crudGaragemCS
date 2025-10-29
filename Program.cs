@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 public class Program
 {
@@ -66,7 +66,7 @@ public class Program
         int indice = escolha - 1;
 
         Console.WriteLine($"Removendo placa {placas[indice]}");
-        
+
         for (int i = indice; i < qtdInseridos - 1; i++)
         {
             placas[i] = placas[i + 1];
@@ -74,6 +74,49 @@ public class Program
         qtdInseridos--;
         Console.WriteLine("Carro removido com sucesso.");
         return;
+    }
+
+    static void substituirPlaca(string[] placas, int qtdInseridos)
+    {
+        if (qtdInseridos == 0)
+        {
+            Console.WriteLine("Garagem vazia. Adicione um carro primeiro.");
+            return;
+        }
+
+        listarCarros(placas, qtdInseridos);
+
+        Console.Write("Digite o número do carro que deseja substituir a placa: ");
+        
+        if (!int.TryParse(Console.ReadLine(), out int escolha))
+        {
+            Console.WriteLine("Entrada inválida.");
+            return;
+        }
+
+        if (escolha < 1 || escolha > qtdInseridos)
+        {
+            Console.WriteLine("Escolha inválida.");
+            return;
+        }
+
+        int indice = escolha - 1;
+        string placaAntiga = placas[indice];
+
+        Console.Write($"Digite a **nova placa** para substituir **{placaAntiga}**: ");
+        string novaPlaca = Console.ReadLine()!.ToUpper();
+
+        for (int i = 0; i < qtdInseridos; i++)
+        {
+            if (placas[i] == novaPlaca)
+            {
+                Console.WriteLine($"A placa {novaPlaca} já está registrada na posição {i + 1}. Substituição cancelada.");
+                return;
+            }
+        }
+
+        placas[indice] = novaPlaca;
+        Console.WriteLine($"Placa substituída com sucesso: {placaAntiga} -> {novaPlaca}");
     }
 
     public static void Main()
@@ -87,8 +130,9 @@ public class Program
             Console.WriteLine("---- MENU ----");
             Console.WriteLine("1 - Adidionar carro");
             Console.WriteLine("2 - Listar carros");
-            Console.WriteLine("3 - Remover carro");
-            Console.WriteLine("4 - Sair");
+            Console.WriteLine("3 - Substituir carro");
+            Console.WriteLine("4 - Remover carro");
+            Console.WriteLine("5 - Sair");
             Console.Write("Opção: ");
             
             if (!int.TryParse(Console.ReadLine(), out opcao))
@@ -105,11 +149,14 @@ public class Program
                     listarCarros(placas, qtdInseridos);
                     break;
                 case 3:
-                    removerCarro(placas, ref qtdInseridos);
+                    substituirPlaca(placas, qtdInseridos);
                     break;
                 case 4:
-                    Console.WriteLine("Saindo da garagem, volte sempre!");
+                    removerCarro(placas, ref qtdInseridos);
                     break;
+                case 5:
+                    Console.WriteLine("Saindo da garagem, volte sempre!");
+                    break;    
                 default:
                     Console.WriteLine("Opção Inválida");
                     break;
