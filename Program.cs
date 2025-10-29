@@ -42,6 +42,7 @@ public class Program
                 Console.WriteLine($"Placa {i + 1}: {placas[i]}");
             }
 
+            Console.WriteLine("----------------------------");
             Console.WriteLine($"Total de placas registradas: {qtdInseridos}");
         }
     }
@@ -56,7 +57,7 @@ public class Program
 
         listarCarros(placas, qtdInseridos);
 
-        Console.WriteLine("Digite um carro pra remover: ");
+        Console.Write("Digite um carro pra remover: ");
         int escolha = Convert.ToInt32(Console.ReadLine());
 
         if (escolha < 1 || escolha > qtdInseridos)
